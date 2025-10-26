@@ -1,4 +1,11 @@
 import { Product } from "../store/productStore";
+// Import burger images so Vite resolves asset URLs in ESM
+import imgMeatbomb from "../assets/burgers/meatbomb.png";
+import imgSupercheese from "../assets/burgers/supercheese.png";
+import imgGood from "../assets/burgers/good.png";
+import imgHeavypunch from "../assets/burgers/heavypunch.png";
+import imgClassic from "../assets/burgers/classic.png";
+import imgItalian from "../assets/burgers/italian.png";
 
 export const products: Product[] = [
   {
@@ -6,7 +13,7 @@ export const products: Product[] = [
     name: "Мясная бомба",
     weight: "200г",
     price: 299,
-    image: require("../assets/burgers/meatbomb.png"),
+    image: imgMeatbomb,
     description: "Мясная бомба",
     ingridient: "Мясо, сыр, помидоры, салат, лук",
     kkall: 100,
@@ -16,7 +23,7 @@ export const products: Product[] = [
     name: "Супер сырный",
     weight: "400г",
     price: 499,
-    image: require("../assets/burgers/supercheese.png"),
+    image: imgSupercheese,
     description: "Супер сырный",
     ingridient: "Мясо, сыр, помидоры, салат, лук",
     kkall: 100,
@@ -26,7 +33,7 @@ export const products: Product[] = [
     name: "Сытный",
     weight: "150г",
     price: 199,
-    image: require("../assets/burgers/good.png"),
+    image: imgGood,
     description: "Сытный",
     ingridient: "Мясо, сыр, помидоры, салат, лук",
     kkall: 100,
@@ -36,7 +43,7 @@ export const products: Product[] = [
     name: "Тяжелый удар",
     weight: "100г",
     price: 249,
-    image: require("../assets/burgers/heavypunch.png"),
+    image: imgHeavypunch,
     description: "Тяжелый удар",
     ingridient: "Мясо, сыр, помидоры, салат, лук",
     kkall: 100,
@@ -46,7 +53,7 @@ export const products: Product[] = [
     name: "Вечная классика",
     weight: "500г",
     price: 99,
-    image: require("../assets/burgers/classic.png"),
+    image: imgClassic,
     description: "Вечная классика",
     ingridient: "Мясо, сыр, помидоры, салат, лук",
     kkall: 100,
@@ -56,7 +63,7 @@ export const products: Product[] = [
     name: "Итальянский",
     weight: "150г",
     price: 199,
-    image: require("../assets/burgers/italian.png"),
+    image: imgItalian,
     description: "Итальянский",
     ingridient: "Мясо, сыр, помидоры, салат, лук",
     kkall: 100,
