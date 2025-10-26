@@ -4,15 +4,15 @@ import CardItem from "./CardItem";
 import { useProductStore } from "../store/productStore";
 import delivery from "../assets/delivery.png";
 import { useEffect } from "react";
-import { useForm } from "react-hook-form"
 
 interface CardmobProps { openDelivery: () => void }
 
 const Cardmob: React.FC<CardmobProps> = ({ openDelivery }) => {
   const [expanded, setExpanded] = useState(false);
-  const { getTotalCount, getTotalPrice, cart } = useProductStore();
-  const [showCheckout, setShowCheckout] = useState(false);
-  const [method, setMethod] = useState<'pickup' | 'delivery'>('pickup');
+  const cart = useProductStore((s) => s.cart);
+  const totalCount = useProductStore((s) => s.cart.reduce((t, i) => t + i.quantity, 0));
+  const totalPrice = useProductStore((s) => s.cart.reduce((t, i) => t + i.product.price * i.quantity, 0));
+  const [showCheckout] = useState(false);
   const handleToggle = () => setExpanded((v) => !v);
   const handleClose = () => setExpanded(false);
 
@@ -41,6 +41,8 @@ const Cardmob: React.FC<CardmobProps> = ({ openDelivery }) => {
           justifyContent: "space-between",
           alignItems: "center",
           cursor: "pointer",
+          position: "relative",
+          zIndex: 20,
         }}
       >
         <Typography variant="h3">Корзина</Typography>
@@ -54,52 +56,32 @@ const Cardmob: React.FC<CardmobProps> = ({ openDelivery }) => {
             py: 0.125,
           }}
         >
-          <Typography variant="subtitle2">{getTotalCount()}</Typography>
+          <Typography variant="subtitle2">{totalCount}</Typography>
         </Box>
       </Box>
       {expanded && (
-        <Box
+
+
+        <Stack
           sx={{
             position: "absolute",
             top: 0,
             left: 0,
             right: 0,
-            zIndex: 1300,
+            zIndex: 10,
             bgcolor: "#fff",
             borderRadius: 2,
-            boxShadow: "0 0 10px rgba(0,0,0,0.16)",
             overflow: "hidden",
             maxHeight: "70vh",
             display: "flex",
             flexDirection: "column",
+            boxShadow: "0 0 10px rgba(0,0,0,0.16)",
+            paddingTop: 5,
+
           }}
         >
-          <Box
-            onClick={handleToggle}
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              cursor: "pointer",
-              px: 1.25,
-              py: 2,
-            }}
-          >
-            <Typography variant="h3">Корзина</Typography>
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                bgcolor: "#F2F2F3",
-                borderRadius: 1.5,
-                px: 1.625,
-                py: 0.125,
-              }}
-            >
-              <Typography variant="subtitle2">{getTotalCount()}</Typography>
-            </Box>
-          </Box>
-          <Box sx={{ flex: 1, overflow: "auto", p: 1.25 }}>
+          {/* <Divider sx={{ my: 1 }} /> */}
+          <Box sx={{ flex: 1, overflow: "auto", px: 1.25 }}>
             {cart.length === 0 ? (
               <Box sx={{ pt: 2, pb: 1 }}>
                 <Typography variant="subtitle1" color="text.secondary">
@@ -107,7 +89,7 @@ const Cardmob: React.FC<CardmobProps> = ({ openDelivery }) => {
                 </Typography>
               </Box>
             ) : (
-              <Stack spacing={1} divider={<Divider />}>
+              <Stack spacing={1.375} divider={<Divider />} sx={{ borderBottom: "1px solid #e0e0e0", borderTop: "1px solid #e0e0e0", py: 1.375 }}>
                 {cart.map((item) => (
                   <CardItem
                     key={item.product.id}
@@ -121,15 +103,14 @@ const Cardmob: React.FC<CardmobProps> = ({ openDelivery }) => {
           {cart.length > 0 && (
             <Box
               sx={{
-                p: 1.25,
-                borderTop: "1px solid #e0e0e0",
+                p: "13px 10px 16px",
                 bgcolor: "#fff",
               }}
             >
               <Stack>
                 <Stack direction="row" justifyContent="space-between">
                   <Typography variant="body1">Итого</Typography>
-                  <Typography variant="body1">{getTotalPrice()} ₴</Typography>
+                  <Typography variant="body1">{totalPrice} ₴</Typography>
                 </Stack>
                 <Button variant="contained" color="primary" sx={{ mt: 2.375, mb: 1 }} fullWidth onClick={openDelivery}>
                   Оформить заказ
@@ -150,8 +131,10 @@ const Cardmob: React.FC<CardmobProps> = ({ openDelivery }) => {
               </Stack>
             </Box>
           )}
-        </Box>
+        </Stack>
+
       )}
+
     </Box>
   );
 };

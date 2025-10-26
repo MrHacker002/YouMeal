@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Box,
-  Stack,
   ToggleButton,
   ToggleButtonGroup,
   Typography,
@@ -14,7 +13,7 @@ const Categories: React.FC = () => {
     <Box
       sx={{
         overflowX: "auto",
-        width: "100%",
+        width: "100vw",
         scrollbarWidth: "none", // Firefox
         msOverflowStyle: "none", // IE и Edge
         "&::-webkit-scrollbar": { display: "none" }, // Chrome, Safari
@@ -24,7 +23,7 @@ const Categories: React.FC = () => {
         value={activeCategory}
         exclusive
         onChange={(_, value) => value && setActiveCategory(value)}
-        sx={{ minWidth: 600, py: 2, gap: 1, mx: 1.25 }}
+        sx={{ py: 2, gap: 1, mx: 1.25 }}
       >
         {categories.map((category) => (
           <ToggleButton

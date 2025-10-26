@@ -1,14 +1,188 @@
 ﻿import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
-  typography: {
-    fontFamily: ['Nunito', 'system-ui', 'Segoe UI', 'Roboto', 'Arial', 'sans-serif'].join(', '),
-  },
   palette: {
-    mode: 'light',
-    primary: { main: '#FF7020' },
-    secondary: { main: '#FFAA20' },
+    mode: 'light', // или 'dark'
+    primary: {
+      main: '#1976d2',
+    },
+    secondary: {
+      main: '#ff9800',
+    },
+    background: {
+      default: '#f5f5f5',
+    },
+    warning: {
+      main: '#FF7020',
+      light: '#FFAB08',
+    },
+    info: {
+      main: '#F2F2F3',
+    },
+  },
+  typography: {
+    fontFamily: 'Nunito, sans-serif',
+    h1: {
+      fontSize: '30px',
+      fontWeight: 800,
+      '@media (min-width:768px)': {
+        fontSize: '36px',
+      },
+      '@media (min-width:1024px)': {
+        fontSize: '50px',
+      },
+    },
+    h2: {
+      fontSize: '28px',
+      fontWeight: 600,
+      '@media (min-width:768px)': {
+        fontSize: '32px',
+      },
+    },
+    h3: {
+      fontSize: '16px',
+      fontWeight: 600,
+      lineHeight: '16px',
+      '@media (min-width:1024px)': {
+        fontSize: '24px',
+        lineHeight: '24px',
+      },
+    },
+    subtitle1: {
+      fontSize: '12px',
+      fontWeight: 400,
+      lineHeight: '16px',
+      '@media (min-width:1024px)': {
+        fontSize: '16px',
+      },
+    },
+    subtitle2: {
+      fontSize: '10px',
+      fontWeight: 400,
+      lineHeight: 'inherit',
+    },
+    body1: {
+      fontSize: '12px',
+      fontWeight: 400,
+      lineHeight: '16px',
+    },
+  },
+  components: {
+    MuiToggleButtonGroup: {
+      styleOverrides: {
+        firstButton: {
+          borderRadius: '50px',
+        },
+        lastButton: {
+          borderRadius: '50px',
+        },
+        middleButton: {
+          borderRadius: '50px',
+        },
+      },
+    },
+    MuiToggleButton: {
+      styleOverrides: {
+        root: {
+          border: '1px solid transparent',
+          textTransform: 'none',
+          whiteSpace: 'nowrap',
+          padding: '3px 8px',
+          backgroundColor: '#fff',
+          '@media (min-width:768px)': {
+            padding: '8px 14px',
+            '&:hover': {
+              border: '1px solid #F86310',
+              backgroundColor: '#fff',
+            },
+          },
+          '&.Mui-selected': {
+            backgroundColor: '#FFAB08',
+            color: '#000',
+            '&:hover': {
+              backgroundColor: '#FFAB08',
+            },
+          },
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: '8px',
+          padding: '9px 0',
+          justifyContent: 'center',
+          alignItems: 'center',
+          textTransform: 'none',
+          boxShadow: 'none',
+          fontSize: '12px',
+          lineHeight: '12px',
+        },
+        containedPrimary: {
+          backgroundColor: '#FF7020',
+          '&:hover': {
+            backgroundColor: '#FFAB08',
+          },
+          color: '#fff',
+        },
+        containedSecondary: {
+          backgroundColor: '#F2F2F3',
+          '&:hover': {
+            backgroundColor: '#FFAB08',
+            color: '#000',
+          },
+        },
+      },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          borderRadius: "8px",
+          padding: "8px 12px",
+          borderColor: "#F2F2F3",
+          fontSize: "10px",
+          width: "100%"
+        },
+        input: {
+          padding: 0,
+        }
+      }
+    },
+    MuiFormControlLabel: {
+      styleOverrides: {
+        root: {
+          fontSize: "10px",
+          marginLeft: "0px"
+        },
+      },
+    },
+    MuiRadio: {
+      defaultProps: {
+        disableRipple: true,
+        disableFocusRipple: true,
+      },
+      styleOverrides: {
+        root: {
+
+          color: '#F2F2F3',
+          '&.Mui-checked': {
+            color: '#000',
+          },
+          transition: 'none',
+          '& .MuiSvgIcon-root': {
+            transition: 'none',
+            fontSize: '12px',
+            width: 12,
+            height: 12,
+          },
+          '& .MuiTouchRipple-root': { display: 'none' },
+          padding: 0,
+          margin: 0,
+        },
+      },
+    },
   },
 });
+
 
 export default theme;
