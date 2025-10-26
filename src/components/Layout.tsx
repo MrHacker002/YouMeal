@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from "react";
+﻿import React, { useState } from "react";
 import { Box, Stack } from "@mui/material";
 import Header from "./Header";
 import Categories from "./Categories";
@@ -9,12 +9,9 @@ import ProductsList from "./ProductsList";
 import { useCategoryStore } from "../store/categoryStore";
 import DeliveryPopup from "./DeliveryPopup";
 
-type LayoutProps =
-  {
-    children: ReactNode;
-  };
 
-const Layout: React.FC<LayoutProps> = () => {
+
+const Layout: React.FC = () => {
   const { setProducts } = useProductStore();
   const { activeCategory } = useCategoryStore();
   const [open, setOpen] = useState(false)
@@ -59,3 +56,4 @@ const Layout: React.FC<LayoutProps> = () => {
 };
 
 export default Layout;
+
