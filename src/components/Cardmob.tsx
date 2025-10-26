@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { Box, Typography, Stack, Divider, Button, Input, RadioGroup, FormControlLabel, Radio, IconButton, Dialog } from "@mui/material";
+import { Box, Typography, Stack, Divider, Button } from "@mui/material";
 import CardItem from "./CardItem";
 import { useProductStore } from "../store/productStore";
 import delivery from "../assets/delivery.png";
-import exit from "../assets/close.png"
 import { useEffect } from "react";
 import { useForm } from "react-hook-form"
 
@@ -16,7 +15,6 @@ const Cardmob: React.FC<CardmobProps> = ({ openDelivery }) => {
   const [method, setMethod] = useState<'pickup' | 'delivery'>('pickup');
   const handleToggle = () => setExpanded((v) => !v);
   const handleClose = () => setExpanded(false);
-  const { register, handleSubmit } = useForm();
 
   useEffect(() => {
     if (showCheckout) {
