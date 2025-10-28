@@ -1,4 +1,4 @@
-import { Box, Typography, Stack, IconButton } from "@mui/material";
+import { Typography, Stack, IconButton } from "@mui/material";
 import Logo from "../assets/LogoFooter.png";
 import Call from "../assets/Call.png";
 import TG from "../assets/Icons/TgIcon.tsx";

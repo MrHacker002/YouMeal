@@ -13,12 +13,12 @@ import {
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { SxProps, Theme } from '@mui/material/styles';
-import { useProductStore } from '../store/productStore';
+import { Product, useProductStore } from '../store/productStore';
 
 interface ItemPopupProps {
     open: boolean;
     onClose: () => void;
-    productId: number | null;
+    product?: Product | null;
     paperSx?: SxProps<Theme>;
 }
 
@@ -29,9 +29,8 @@ const StyledImage = styled('img')({
     marginBottom: '16px',
 });
 
-const ItemPopup: React.FC<ItemPopupProps> = ({ open, onClose, productId, paperSx }) => {
-    const { getProductById, addToCart } = useProductStore();
-    const product = productId != null ? getProductById(productId) : undefined;
+const ItemPopup: React.FC<ItemPopupProps> = ({ open, onClose, product, paperSx }) => {
+    const { addToCart } = useProductStore();
     const [count, setCount] = useState(1);
 
     const handleAdd = () => {
@@ -174,5 +173,4 @@ const ItemPopup: React.FC<ItemPopupProps> = ({ open, onClose, productId, paperSx
 };
 
 export default ItemPopup;
-
 

@@ -2,7 +2,7 @@
 import { Box, Stack } from "@mui/material";
 import Header from "./Header";
 import Categories from "./Categories";
-import Cardmob from "./Cardmob";
+import Cardmob from "./Basket";
 import { useProductStore } from "../store/productStore";
 import { products } from "../data/products";
 import ProductsList from "./ProductsList";
@@ -24,6 +24,9 @@ const Layout: React.FC = () => {
   React.useEffect(() => {
     setProducts(products);
   }, [setProducts]);
+  const filteredProducts = React.useMemo(() => {
+    return products.filter((p: { category: string }) => p.category === activeCategory);
+  }, [activeCategory]);
   return (
     <Stack
       direction="column"
@@ -46,7 +49,7 @@ const Layout: React.FC = () => {
           }}
         >
           <Cardmob openDelivery={onOpenDelivery} />
-          <ProductsList products={products} activeCategory={activeCategory} />
+          <ProductsList products={filteredProducts} activeCategory={activeCategory} />
         </Stack>
       </Box>
       <Box component="footer">

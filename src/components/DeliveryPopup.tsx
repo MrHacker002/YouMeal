@@ -17,7 +17,7 @@ interface OrderFormValues {
     adress?: string;
     floor?: string;
     flatNum?: string;
-    method?: 'pickup' | 'delivery';
+    // method хранится во внешнем состоянии, не в форме
 }
 
 const DeliveryPopup: React.FC<DeliveryPopupProps> = ({ open, onClose, paperSx }) => {
@@ -26,12 +26,18 @@ const DeliveryPopup: React.FC<DeliveryPopupProps> = ({ open, onClose, paperSx })
     const onChangeRadio = (e: React.ChangeEvent<HTMLInputElement>) => setMethod(e.target.value as 'pickup' | 'delivery')
     const onSubmit: SubmitHandler<OrderFormValues> = async (data) => {
         try {
-            console.log("Отправляем данные:", data);
+            const payload = {
+                ...data,
+                method, // 'pickup' | 'delivery'
+                // продублируем правильное имя поля адреса
+                address: data.adress,
+            };
+            console.log("Отправляем данные:", payload);
 
             const response = await fetch("http://localhost:5000/api/order", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data),
+                body: JSON.stringify(payload),
             });
 
             const result = await response.json();

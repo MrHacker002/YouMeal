@@ -13,17 +13,17 @@ const ProductsList: React.FC<ProductsListProps> = ({
   activeCategory,
 }) => {
   const { addToCart } = useProductStore();
-  const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [selected, setSelected] = useState<Product | null>(null);
   const [open, setOpen] = useState(false);
 
   const openPopup = (product: Product) => {
-    setSelectedId(product.id);
+    setSelected(product);
     setOpen(true);
   };
 
   const closePopup = () => {
     setOpen(false);
-    setSelectedId(null);
+    setSelected(null);
   };
   return (
     <Stack gap={2}>
@@ -73,7 +73,7 @@ const ProductsList: React.FC<ProductsListProps> = ({
           </Grid>
         ))}
       </Grid>
-      <ItemPopup productId={selectedId} open={open} onClose={closePopup} />
+      <ItemPopup product={selected} open={open} onClose={closePopup} />
     </Stack>
   );
 };

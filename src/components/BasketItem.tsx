@@ -7,7 +7,7 @@ interface CardItemProps {
   quantity?: number;
 }
 
-const CardItem: React.FC<CardItemProps> = ({ product, quantity }) => {
+const BasketItem: React.FC<CardItemProps> = ({ product, quantity }) => {
   const { getProductQuantity, addToCart, removeFromCart } = useProductStore();
 
   if (!product) return null;
@@ -82,4 +82,4 @@ const CardItem: React.FC<CardItemProps> = ({ product, quantity }) => {
   );
 };
 
-export default CardItem;
+export default BasketItem;
