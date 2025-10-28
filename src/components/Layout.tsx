@@ -8,7 +8,7 @@ import { products } from "../data/products";
 import ProductsList from "./ProductsList";
 import { useCategoryStore } from "../store/categoryStore";
 import DeliveryPopup from "./DeliveryPopup";
-
+import Footer from "./Footer";
 
 
 const Layout: React.FC = () => {
@@ -49,7 +49,9 @@ const Layout: React.FC = () => {
           <ProductsList products={products} activeCategory={activeCategory} />
         </Stack>
       </Box>
-      <Box component="footer">{111}</Box>
+      <Box component="footer">
+        <Footer />
+      </Box>
       <DeliveryPopup open={open} onClose={onCloseDelivery} />
     </Stack>
   );

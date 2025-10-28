@@ -1,6 +1,6 @@
 import { Grid, Stack, Typography } from "@mui/material";
 import burgerHeader from "../assets/burger_header.png";
-import logo from "../assets/Logo.png";
+import logo from "../assets/LogoHeader.png";
 
 const Header: React.FC = () => {
   return (
