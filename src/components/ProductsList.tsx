@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Product, useProductStore } from "../store/productStore";
 import { Box, Button, Stack, Typography, Grid } from "@mui/material";
+import ItemPopup from "./ItemPopup";
 
 interface ProductsListProps {
   products: Product[];
@@ -12,6 +13,18 @@ const ProductsList: React.FC<ProductsListProps> = ({
   activeCategory,
 }) => {
   const { addToCart } = useProductStore();
+  const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [open, setOpen] = useState(false);
+
+  const openPopup = (product: Product) => {
+    setSelectedId(product.id);
+    setOpen(true);
+  };
+
+  const closePopup = () => {
+    setOpen(false);
+    setSelectedId(null);
+  };
   return (
     <Stack gap={2}>
       <Typography variant="h2">{activeCategory}</Typography>
@@ -25,7 +38,9 @@ const ProductsList: React.FC<ProductsListProps> = ({
                 p: 0.5,
                 borderRadius: 1.5,
                 backgroundColor: "#FFFFFF",
+                cursor: "pointer",
               }}
+              onClick={() => openPopup(product)}
             >
               <img
                 src={product.image}
@@ -38,16 +53,19 @@ const ProductsList: React.FC<ProductsListProps> = ({
               <Typography variant="h3" sx={{ mb: 0.5 }}>
                 {product.price} ₴
               </Typography>
-              <Typography variant="subtitle1" sx={{ mb: 2 }}>
+              <Typography variant="body1" sx={{ mb: 2 }}>
                 {product.name}
               </Typography>
-              <Typography variant="subtitle1" sx={{ mb: 1 }}>
+              <Typography variant="body1" sx={{ mb: 1 }}>
                 {product.weight}
               </Typography>
               <Button
                 variant="contained"
                 color="secondary"
-                onClick={() => addToCart(product)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  addToCart(product);
+                }}
               >
                 Добавить
               </Button>
@@ -55,6 +73,7 @@ const ProductsList: React.FC<ProductsListProps> = ({
           </Grid>
         ))}
       </Grid>
+      <ItemPopup productId={selectedId} open={open} onClose={closePopup} />
     </Stack>
   );
 };

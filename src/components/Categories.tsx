@@ -38,7 +38,7 @@ const Categories: React.FC = () => {
               alt={category.label}
               style={{ width: 24, height: 24, marginRight: 8 }}
             />
-            <Typography variant="subtitle1">{category.label}</Typography>
+            <Typography variant="body1">{category.label}</Typography>
           </ToggleButton>
         ))}
       </ToggleButtonGroup>

@@ -49,7 +49,7 @@ const theme = createTheme({
       },
     },
     subtitle1: {
-      fontSize: '12px',
+      fontSize: '18px',
       fontWeight: 400,
       lineHeight: '16px',
       '@media (min-width:1024px)': {
@@ -137,16 +137,46 @@ const theme = createTheme({
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
-          borderRadius: "8px",
-          padding: "8px 12px",
-          borderColor: "#F2F2F3",
-          fontSize: "10px",
-          width: "100%"
+          borderRadius: '8px',
+          padding: '8px 12px',
+          borderColor: '#F2F2F3',
+          fontSize: '10px',
+          width: '100%',
+          // Focused state: highlight outline
+          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            borderColor: '#FFAB08',
+            borderWidth: 1,
+          },
+          // Error state: default MUI error color
+          '&.Mui-error .MuiOutlinedInput-notchedOutline': {
+            borderColor: '#d32f2f',
+          },
+          // Filled (has value) state: highlight outline as on focus
+          '&:has(input:not(:placeholder-shown)) .MuiOutlinedInput-notchedOutline': {
+            borderColor: '#FFAB08',
+            borderWidth: 1,
+          },
+          // Remove autofill background on WebKit
+          '& input:-webkit-autofill': {
+            WebkitBoxShadow: '0 0 0 1000px #fff inset',
+            boxShadow: '0 0 0 1000px #fff inset',
+            WebkitTextFillColor: '#000',
+            caretColor: '#000',
+            transition: 'background-color 9999s ease-out 0s',
+          },
+          '& input:-webkit-autofill:focus': {
+            WebkitBoxShadow: '0 0 0 1000px #fff inset',
+            boxShadow: '0 0 0 1000px #fff inset',
+          },
+          '& input:-webkit-autofill:hover': {
+            WebkitBoxShadow: '0 0 0 1000px #fff inset',
+            boxShadow: '0 0 0 1000px #fff inset',
+          },
         },
         input: {
           padding: 0,
-        }
-      }
+        },
+      },
     },
     MuiFormControlLabel: {
       styleOverrides: {

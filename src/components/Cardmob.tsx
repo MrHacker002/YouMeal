@@ -84,7 +84,7 @@ const Cardmob: React.FC<CardmobProps> = ({ openDelivery }) => {
           <Box sx={{ flex: 1, overflow: "auto", px: 1.25 }}>
             {cart.length === 0 ? (
               <Box sx={{ pt: 2, pb: 1 }}>
-                <Typography variant="subtitle1" color="text.secondary">
+                <Typography variant="body1" color="text.secondary">
                   Тут пока пусто :(
                 </Typography>
               </Box>

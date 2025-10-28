@@ -43,7 +43,7 @@ const Header: React.FC = () => {
                 сочные бургеры!
               </Typography>
             </Stack>
-            <Typography variant="subtitle1" sx={{ color: "white" }}>
+            <Typography variant="body1" sx={{ color: "white" }}>
               Бесплатная доставка от 599₽
             </Typography>
           </Stack>

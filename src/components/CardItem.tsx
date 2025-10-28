@@ -44,7 +44,7 @@ const CardItem: React.FC<CardItemProps> = ({ product, quantity }) => {
           borderRadius: 2,
           px: 0.375,
           width: { xs: 68, md: 74 },
-          height: 30,
+          height: { xs: 30, md: 40 },
         }}
       >
         <Button
@@ -59,9 +59,9 @@ const CardItem: React.FC<CardItemProps> = ({ product, quantity }) => {
             },
           }}
         >
-          <Typography variant="subtitle1">-</Typography>
+          <Typography variant="body1">-</Typography>
         </Button>
-        <Typography variant="subtitle1">{displayQuantity}</Typography>
+        <Typography variant="body1">{displayQuantity}</Typography>
         <Button
           onClick={handleIncrement}
           size="small"
@@ -74,7 +74,7 @@ const CardItem: React.FC<CardItemProps> = ({ product, quantity }) => {
             },
           }}
         >
-          <Typography variant="subtitle1">+</Typography>
+          <Typography variant="body1">+</Typography>
         </Button>
       </Stack>
       <Divider />
