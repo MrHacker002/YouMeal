@@ -33,10 +33,10 @@ const theme = createTheme({
       },
     },
     h2: {
-      fontSize: '26px',
+      fontSize: '28px',
       fontWeight: 600,
-      '@media (min-width:768px)': {
-        fontSize: '32px',
+      '@media (min-width:1024px)': {
+        fontSize: '40px',
       },
     },
     h3: {
@@ -53,18 +53,24 @@ const theme = createTheme({
       fontWeight: 400,
       lineHeight: '16px',
       '@media (min-width:1024px)': {
-        fontSize: '16px',
+        fontSize: '24px',
       },
     },
     subtitle2: {
       fontSize: '10px',
       fontWeight: 400,
       lineHeight: 'inherit',
+      '@media (min-width:1024px)': {
+        fontSize: '12px',
+      },
     },
     body1: {
       fontSize: '12px',
       fontWeight: 400,
       lineHeight: '16px',
+      '@media (min-width:1024px)': {
+        fontSize: '16px',
+      },
     },
   },
   components: {
@@ -89,7 +95,7 @@ const theme = createTheme({
           whiteSpace: 'nowrap',
           padding: '3px 8px',
           backgroundColor: '#fff',
-          '@media (min-width:768px)': {
+          '@media (min-width:1024px)': {
             padding: '8px 14px',
             '&:hover': {
               border: '1px solid #F86310',

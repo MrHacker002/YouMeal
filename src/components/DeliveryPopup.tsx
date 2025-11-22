@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Dialog, Typography, RadioGroup, FormControlLabel, Radio, Stack, DialogTitle, DialogContent, DialogActions, Button, OutlinedInput, IconButton } from "@mui/material"
-import { SxProps, Theme } from "@mui/material/styles";
+import { Dialog, Typography, RadioGroup, FormControlLabel, Radio, Stack, DialogTitle, DialogContent, DialogActions, Button, OutlinedInput, IconButton, useMediaQuery } from "@mui/material"
+import { SxProps, Theme, useTheme } from "@mui/material/styles";
 import CloseIcon from '@mui/icons-material/Close';
 import { SubmitHandler, useForm } from "react-hook-form"
 
@@ -21,6 +21,8 @@ interface OrderFormValues {
 }
 
 const DeliveryPopup: React.FC<DeliveryPopupProps> = ({ open, onClose, paperSx }) => {
+    const theme = useTheme();
+    const isXs = useMediaQuery(theme.breakpoints.down('sm'));
     const { register, handleSubmit, formState: { errors } } = useForm<OrderFormValues>();
     const [method, setMethod] = useState<'pickup' | 'delivery'>('pickup');
     const onChangeRadio = (e: React.ChangeEvent<HTMLInputElement>) => setMethod(e.target.value as 'pickup' | 'delivery')
@@ -60,7 +62,7 @@ const DeliveryPopup: React.FC<DeliveryPopupProps> = ({ open, onClose, paperSx })
         <Dialog
             onClose={onClose}
             open={open}
-            fullScreen
+            fullScreen={isXs}
             slotProps={{
                 paper: {
                     sx: [

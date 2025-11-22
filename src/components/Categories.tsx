@@ -5,10 +5,19 @@ import {
   ToggleButtonGroup,
   Typography,
 } from "@mui/material";
-import { useCategoryStore, categories } from "../store/categoryStore";
+import { useNavigate } from "react-router-dom";
+import { categories } from "../store/categoryStore";
 
-const Categories: React.FC = () => {
-  const { activeCategory, setActiveCategory } = useCategoryStore();
+interface CategoriesProps {
+  activeCategory: string; // slug
+}
+
+const Categories: React.FC<CategoriesProps> = ({ activeCategory }) => {
+  const navigate = useNavigate();
+  const handleChange = (_: React.MouseEvent<HTMLElement>, value: string | null) => {
+    if (!value) return;
+    navigate(`/category/${encodeURIComponent(value)}`);
+  };
   return (
     <Box
       sx={{
@@ -22,13 +31,13 @@ const Categories: React.FC = () => {
       <ToggleButtonGroup
         value={activeCategory}
         exclusive
-        onChange={(_, value) => value && setActiveCategory(value)}
+        onChange={handleChange}
         sx={{ py: 2, gap: 1, mx: 1.25 }}
       >
         {categories.map((category) => (
           <ToggleButton
-            key={category.label}
-            value={category.label}
+            key={category.slug}
+            value={category.slug}
             sx={{
               transition: "background 0.2s",
             }}

@@ -52,8 +52,8 @@ const Footer: React.FC = () => {
                 </Stack>
             </Stack>
             <Stack mt={{ xs: 1.25 }}>
-                <Typography variant="body1">© YouMeal, 2022</Typography>
-                <Typography variant="body1">Design: Anastasia Ilina</Typography>
+                <Typography fontSize={12}>© YouMeal, 2022</Typography>
+                <Typography fontSize={12}>Design: Anastasia Ilina</Typography>
             </Stack>
         </Stack>
     )

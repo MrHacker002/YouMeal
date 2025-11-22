@@ -27,12 +27,12 @@ const Header: React.FC = () => {
       }}
     >
       <Stack direction="row" justifyContent="center" mb={3} gap={0.5}>
-        <Typography variant="h2" sx={{ color: "white" }}>
+        <Typography variant="h2" fontWeight={800} sx={{ color: "white" }}>
           YourMeal
         </Typography>
         <img src={logo} alt="logo" />
       </Stack>
-      <Grid container direction={{ xs: "column", md: "row-reverse" }}>
+      <Grid container sx={{ flexDirection: { xs: "column", sm: "row-reverse" }, alignItems: { sm: "center" }, justifyContent: { sm: "center" } }} >
         <Grid>
           <Stack alignItems="center" mb={2.5}>
             <Stack alignItems="center" mb={2}>
@@ -54,7 +54,7 @@ const Header: React.FC = () => {
           </Stack>
         </Grid>
       </Grid>
-    </Stack>
+    </Stack >
   );
 };
 export default Header;

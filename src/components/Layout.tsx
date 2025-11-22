@@ -6,14 +6,28 @@ import Cardmob from "./Basket";
 import { useProductStore } from "../store/productStore";
 import { products } from "../data/products";
 import ProductsList from "./ProductsList";
-import { useCategoryStore } from "../store/categoryStore";
+import {
+  defaultCategory,
+  defaultCategorySlug,
+  getCategoryBySlug,
+} from "../store/categoryStore";
 import DeliveryPopup from "./DeliveryPopup";
 import Footer from "./Footer";
+import { Navigate, useParams } from "react-router-dom";
 
 
 const Layout: React.FC = () => {
   const { setProducts } = useProductStore();
-  const { activeCategory } = useCategoryStore();
+  const { slug } = useParams<{ slug?: string }>();
+  const activeCategory = React.useMemo(() => {
+    if (!slug) return defaultCategory;
+    try {
+      const decoded = decodeURIComponent(slug);
+      return getCategoryBySlug(decoded)?.label ?? defaultCategory;
+    } catch {
+      return defaultCategory;
+    }
+  }, [slug]);
   const [open, setOpen] = useState(false)
   const onCloseDelivery = () => {
     setOpen(false)
@@ -27,6 +41,10 @@ const Layout: React.FC = () => {
   const filteredProducts = React.useMemo(() => {
     return products.filter((p: { category: string }) => p.category === activeCategory);
   }, [activeCategory]);
+  const activeSlug = slug ?? defaultCategorySlug;
+  if (!getCategoryBySlug(activeSlug)) {
+    return <Navigate to={`/category/${encodeURIComponent(defaultCategorySlug)}`} replace />;
+  }
   return (
     <Stack
       direction="column"
@@ -37,16 +55,17 @@ const Layout: React.FC = () => {
       <Box component="header">
         <Header />
       </Box>
-      <Box component="main" flexGrow={1}>
-        <Categories />
+      <Box component="main" flexGrow={1}
+        sx={{
+          position: "relative",
+          mt: { xs: 3.75, sm: 4.5 },
+          px: { xs: 1.25, sm: 8 },
+        }}>
+        <Categories activeCategory={activeSlug} />
         <Stack
           direction="column"
           spacing={2}
-          sx={{
-            mt: 3.75,
-            px: 1.25,
-            position: "relative",
-          }}
+
         >
           <Cardmob openDelivery={onOpenDelivery} />
           <ProductsList products={filteredProducts} activeCategory={activeCategory} />
