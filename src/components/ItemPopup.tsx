@@ -25,8 +25,7 @@ interface ItemPopupProps {
 const StyledImage = styled('img')({
     width: '100%',
     objectFit: 'cover',
-    borderRadius: '8px',
-    marginBottom: '16px',
+    borderRadius: '16px'
 });
 
 const ItemPopup: React.FC<ItemPopupProps> = ({ open, onClose, product, paperSx }) => {
@@ -53,26 +52,28 @@ const ItemPopup: React.FC<ItemPopupProps> = ({ open, onClose, product, paperSx }
         <Dialog
             open={open}
             onClose={handleClose}
-            fullScreen
+            // full screen only on small screens (<= 600px)
+            fullScreen={typeof window !== 'undefined' && window.matchMedia('(max-width:600px)').matches}
             slotProps={{
                 paper: {
                     sx: [
                         {
                             boxSizing: 'border-box',
-                            height: '100dvh',
-                            borderRadius: 0,
-                            py: 4,
-                            px: 1.25,
+                            height: { xs: '100dvh', sm: 'auto' },
+                            borderRadius: { xs: 0, sm: 3 },
+                            p: { xs: "32px 10px", sm: "16px 16px 24px", md: "24px 24px 36px" },
                             display: 'flex',
                             flexDirection: 'column',
                             overflow: 'hidden',
+                            m: 0,
+                            mx: { xs: 0, sm: "calc(100vw / 6)" }
                         },
                         paperSx,
                     ] as SxProps<Theme>,
                 },
             }}
         >
-            <DialogTitle sx={{ p: 0, mb: 1.5 }}>
+            <DialogTitle sx={{ p: 0, mb: { xs: 1.5, sm: 2, md: 3 } }}>
                 <Typography variant="h2">{product ? product.name : 'Товар'}</Typography>
                 <IconButton
                     onClick={handleClose}
@@ -82,95 +83,99 @@ const ItemPopup: React.FC<ItemPopupProps> = ({ open, onClose, product, paperSx }
                     <CloseIcon />
                 </IconButton>
             </DialogTitle>
-            <DialogContent sx={{ p: 0, flex: 1, overflow: 'auto' }}>
+            <DialogContent sx={{ p: 0, flex: 1, overflow: 'auto', mb: { sm: 3, md: 5 } }}>
                 {product ? (
-                    <Box>
+                    <Stack direction={{ xs: "column", sm: "row" }} gap={{ xs: 2, sm: 1, md: 2 }}>
                         <StyledImage src={product.image} alt={product.name} />
-                        {product.description && (
-                            <Typography variant="body1">
-                                {product.description}
-                            </Typography>
-                        )}
-                        {product.ingridient && (
-                            <Box sx={{ mt: 1.25 }}>
-                                <Typography variant="subtitle2">
-                                    Состав:
+                        <Box>
+
+                            {product.description && (
+                                <Typography variant="body1">
+                                    {product.description}
                                 </Typography>
-                                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.25, mt: 0.5 }}>
-                                    {product.ingridient.split(',').map((ing, idx) => {
-                                        const clean = ing.trim();
-                                        const capped = clean ? clean.charAt(0).toUpperCase() + clean.slice(1) : clean;
-                                        return (
-                                            <Typography key={idx} variant="subtitle2">{capped}</Typography>
-                                        );
-                                    })}
+                            )}
+                            {product.ingridient && (
+                                <Box sx={{ mt: 1.25 }}>
+                                    <Typography variant="subtitle2">
+                                        Состав:
+                                    </Typography>
+                                    <Box sx={{ display: 'flex', flexDirection: 'column', mt: 0.5 }}>
+                                        {product.ingridient.split(',').map((ing, idx) => {
+                                            const clean = ing.trim();
+                                            const capped = clean ? clean.charAt(0).toUpperCase() + clean.slice(1) : clean;
+                                            return (
+                                                <Typography key={idx} variant="subtitle2">{capped}</Typography>
+                                            );
+                                        })}
+                                    </Box>
                                 </Box>
-                            </Box>
-                        )}
-                        <Typography variant="subtitle2" sx={{ color: '#B1B1B1' }} >
-                            {product.weight}
-                            {typeof product.kkall === 'number' ? `, ккал ${product.kkall}` : ''}
-                        </Typography>
-                    </Box>
+                            )}
+                            <Typography variant="subtitle2" sx={{ color: '#B1B1B1', mt: 0.5 }} >
+                                {product.weight}
+                                {typeof product.kkall === 'number' ? `, ккал ${product.kkall}` : ''}
+                            </Typography>
+                        </Box>
+                    </Stack>
                 ) : (
                     <Typography variant="body1">Товар не найден</Typography>
                 )}
             </DialogContent>
-            <DialogActions sx={{ p: 0, mb: 2 }} >
-                <Button
-                    variant="contained"
-                    color="primary"
-                    fullWidth
-                    onClick={handleAdd}
-                    disabled={!product}
-                >
-                    Добавить
-                </Button>
-                <Stack
-                    direction="row"
-                    justifyContent="space-between"
-                    alignItems="center"
-                    sx={{
-                        bgcolor: '#F2F2F3',
-                        flexShrink: 0,
-                        borderRadius: 2,
-                        px: 0.375,
-                        width: { xs: 68, md: 74 },
-                        height: { xs: 30, md: 40 },
-                    }}
-                >
+            <Stack>
+                <DialogActions sx={{ p: 0, mb: 2 }} >
                     <Button
-                        onClick={handleDec}
-                        size="small"
-                        disabled={count <= 1}
+                        variant="contained"
+                        color="primary"
+                        fullWidth
+                        onClick={handleAdd}
+                        disabled={!product}
+                    >
+                        Добавить
+                    </Button>
+                    <Stack
+                        direction="row"
+                        justifyContent="space-between"
+                        alignItems="center"
                         sx={{
-                            minWidth: 'inherit',
-                            px: 0.625,
-                            color: 'text.primary',
-                            '&:hover': { bgcolor: 'rgba(0, 0, 0, 0.04)' },
+                            bgcolor: '#F2F2F3',
+                            flexShrink: 0,
+                            borderRadius: 2,
+                            px: 0.375,
+                            width: { xs: 68, md: 74 },
+                            height: { xs: 30, md: 40 },
                         }}
                     >
-                        <Typography variant="body1">-</Typography>
-                    </Button>
-                    <Typography variant="body1">{count}</Typography>
-                    <Button
-                        onClick={handleInc}
-                        size="small"
-                        sx={{
-                            minWidth: 'inherit',
-                            px: 0.625,
-                            color: 'text.primary',
-                            '&:hover': { bgcolor: 'rgba(0, 0, 0, 0.04)' },
-                        }}
-                    >
-                        <Typography variant="body1">+</Typography>
-                    </Button>
-                </Stack>
-            </DialogActions>
-            <Typography variant='h3' align='right'>{getPrice()}₴</Typography>
-        </Dialog>
+                        <Button
+                            onClick={handleDec}
+                            size="small"
+                            disabled={count <= 1}
+                            sx={{
+                                minWidth: 'inherit',
+                                px: 0.625,
+                                color: 'text.primary',
+                                '&:hover': { bgcolor: 'rgba(0, 0, 0, 0.04)' },
+                            }}
+                        >
+                            <Typography variant="body1">-</Typography>
+                        </Button>
+                        <Typography variant="body1">{count}</Typography>
+                        <Button
+                            onClick={handleInc}
+                            size="small"
+                            sx={{
+                                minWidth: 'inherit',
+                                px: 0.625,
+                                color: 'text.primary',
+                                '&:hover': { bgcolor: 'rgba(0, 0, 0, 0.04)' },
+                            }}
+                        >
+                            <Typography variant="body1">+</Typography>
+                        </Button>
+                    </Stack>
+                </DialogActions>
+                <Typography variant='h3' align='right'>{getPrice()}₴</Typography>
+            </Stack>
+        </Dialog >
     );
 };
 
 export default ItemPopup;
-
