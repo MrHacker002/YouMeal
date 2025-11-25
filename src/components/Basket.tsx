@@ -31,7 +31,8 @@ const Basket: React.FC<BasketProps> = ({ openDelivery }) => {
         borderRadius: 3,
         py: 2,
         px: 1.25,
-        mb: 2,
+        maxWidth: expanded ? "300px" : "145px",
+        boxSizing: "border-box",
       }}
     >
       <Box

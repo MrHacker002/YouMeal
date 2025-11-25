@@ -9,21 +9,40 @@ const Header: React.FC = () => {
       position="relative"
       zIndex={1}
       sx={{
-        mb: 7.5,
+        mb: 3.75,
         mt: 3,
         "&::before": {
           content: '""',
           display: "block",
-          width: "200%",
-          height: "145%",
-          backgroundColor: "orange",
+          backgroundColor: "#FFAB08",
           borderRadius: "50%",
           position: "absolute",
           bottom: -4,
-          left: 0,
+
+          left: "50%",
+          transform: "translate(-50%, 4%)",
           zIndex: -1,
-          transform: "translate(-25%, 5%)",
-        },
+          width: "611px",
+          height: "611px",
+
+          "@media (min-width:321px) and (max-width:768px)": {
+            width: "calc(430.58036vw - 766.85714px)",
+            height: "calc(430.58036vw - 766.85714px)",
+            transform: "translate(-50%, 1%)",
+          },
+
+          "@media (min-width:769px) and (max-width:1024px)": {
+            width: "calc(132.8125vw + 1520px)",
+            height: "calc(132.8125vw + 1520px)",
+            transform: "translate(-50%, 1%)",
+          },
+
+          "@media (min-width:1025px)": {
+            width: "2880px",
+            height: "2880px",
+            transform: "translate(-50%, 1%)",
+          },
+        }
       }}
     >
       <Stack direction="row" justifyContent="center" mb={3} gap={0.5}>
@@ -32,10 +51,10 @@ const Header: React.FC = () => {
         </Typography>
         <img src={logo} alt="logo" />
       </Stack>
-      <Grid container sx={{ flexDirection: { xs: "column", sm: "row-reverse" }, alignItems: { sm: "center" }, justifyContent: { sm: "center" } }} >
+      <Grid container sx={{ flexDirection: { xs: "column", sm: "row-reverse" }, alignItems: { sm: "center" }, justifyContent: { sm: "center" }, gap: { sm: 1.25 } }} >
         <Grid>
-          <Stack alignItems="center" mb={2.5}>
-            <Stack alignItems="center" mb={2}>
+          <Stack alignItems={{ xs: "center", sm: "start" }} mb={2.5}>
+            <Stack alignItems={{ xs: "center", sm: "start" }} mb={2}>
               <Typography variant="h1" sx={{ color: "white" }}>
                 Только самые
               </Typography>

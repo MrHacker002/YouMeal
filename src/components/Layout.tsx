@@ -2,7 +2,7 @@
 import { Box, Stack } from "@mui/material";
 import Header from "./Header";
 import Categories from "./Categories";
-import Cardmob from "./Basket";
+import Basket from "./Basket";
 import { useProductStore } from "../store/productStore";
 import { products } from "../data/products";
 import ProductsList from "./ProductsList";
@@ -58,16 +58,18 @@ const Layout: React.FC = () => {
       <Box component="main" flexGrow={1}
         sx={{
           position: "relative",
-          mt: { xs: 3.75, sm: 4.5 },
+          mt: { xs: 3.75 },
           px: { xs: 1.25, sm: 8 },
+          boxSizing: "border-box",
+          width: "100vw",
         }}>
         <Categories activeCategory={activeSlug} />
         <Stack
           direction="column"
-          spacing={2}
-
+          spacing={3.75}
+          mt={{ xs: 3.75 }}
         >
-          <Cardmob openDelivery={onOpenDelivery} />
+          <Basket openDelivery={onOpenDelivery} />
           <ProductsList products={filteredProducts} activeCategory={activeCategory} />
         </Stack>
       </Box>

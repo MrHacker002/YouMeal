@@ -26,13 +26,14 @@ const Categories: React.FC<CategoriesProps> = ({ activeCategory }) => {
         scrollbarWidth: "none", // Firefox
         msOverflowStyle: "none", // IE и Edge
         "&::-webkit-scrollbar": { display: "none" }, // Chrome, Safari
+        lineHeight: "0"
       }}
     >
       <ToggleButtonGroup
         value={activeCategory}
         exclusive
         onChange={handleChange}
-        sx={{ py: 2, gap: 1, mx: 1.25 }}
+        sx={{ gap: 1 }}
       >
         {categories.map((category) => (
           <ToggleButton

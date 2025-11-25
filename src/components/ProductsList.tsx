@@ -30,7 +30,7 @@ const ProductsList: React.FC<ProductsListProps> = ({
       <Typography variant="h2">{activeCategory}</Typography>
       <Grid container spacing={2}>
         {products.map((product) => (
-          <Grid size={{ xs: 6, md: 3 }} key={product.id}>
+          <Grid size={{ xs: 6, sm: 3, md: 3 }} key={product.id}>
             <Box
               sx={{
                 display: "flex",

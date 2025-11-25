@@ -93,7 +93,7 @@ const theme = createTheme({
           border: '1px solid transparent',
           textTransform: 'none',
           whiteSpace: 'nowrap',
-          padding: '3px 8px',
+          padding: '2px 8px',
           backgroundColor: '#fff',
           '@media (min-width:1024px)': {
             padding: '8px 14px',
@@ -102,10 +102,14 @@ const theme = createTheme({
               backgroundColor: '#fff',
             },
           },
+          '&:focus': {
+            outline: 'none',
+            boxShadow: 'none',
+          },
           '&.Mui-selected': {
             backgroundColor: '#FFAB08',
-            color: '#000',
-            '&:hover': {
+            color: '#000', '&:hover': {
+              border: '1px solid #FFAB08',
               backgroundColor: '#FFAB08',
             },
           },
